@@ -23,6 +23,9 @@ use App\Http\Controllers\GradingSystemController;
 use App\Http\Controllers\SchoolSessionController;
 use App\Http\Controllers\AssignedTeacherController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,13 +65,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('course/update', [CourseController::class, 'update'])->name('course.update');
 
         // Teacher
-        Route::post('teacher/create', [UserController::class, 'storeTeacher'])->name('teacher.create');
-        Route::post('teacher/update', [UserController::class, 'updateTeacher'])->name('teacher.update');
+        Route::post('teacher/create', [TeacherController::class, 'storeTeacher'])->name('teacher.create');
+        Route::post('teacher/update', [TeacherController::class, 'updateTeacher'])->name('teacher.update');
         Route::post('teacher/assign', [AssignedTeacherController::class, 'store'])->name('teacher.assign');
 
         // Student
-        Route::post('student/create', [UserController::class, 'storeStudent'])->name('student.create');
-        Route::post('student/update', [UserController::class, 'updateStudent'])->name('student.update');
+        Route::post('student/create', [StudentController::class, 'storeStudent'])->name('student.create');
+        Route::post('student/update', [StudentController::class, 'updateStudent'])->name('student.update');
     });
 
 
@@ -90,15 +93,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/teachers/add', function () {
         return view('teachers.add');
     })->name('teacher.create.show');
-    Route::get('/teachers/edit/{id}', [UserController::class, 'editTeacher'])->name('teacher.edit.show');
-    Route::get('/teachers/view/list', [UserController::class, 'getTeacherList'])->name('teacher.list.show');
-    Route::get('/teachers/view/profile/{id}', [UserController::class, 'showTeacherProfile'])->name('teacher.profile.show');
+    Route::get('/teachers/edit/{id}', [TeacherController::class, 'editTeacher'])->name('teacher.edit.show');
+    Route::get('/teachers/view/list', [TeacherController::class, 'getTeacherList'])->name('teacher.list.show');
+    Route::get('/teachers/view/profile/{id}', [TeacherController::class, 'showTeacherProfile'])->name('teacher.profile.show');
 
     //Students
-    Route::get('/students/add', [UserController::class, 'createStudent'])->name('student.create.show');
-    Route::get('/students/edit/{id}', [UserController::class, 'editStudent'])->name('student.edit.show');
-    Route::get('/students/view/list', [UserController::class, 'getStudentList'])->name('student.list.show');
-    Route::get('/students/view/profile/{id}', [UserController::class, 'showStudentProfile'])->name('student.profile.show');
+    Route::get('/students/add', [StudentController::class, 'createStudent'])->name('student.create.show');
+    Route::get('/students/edit/{id}', [StudentController::class, 'editStudent'])->name('student.edit.show');
+    Route::get('/students/view/list', [StudentController::class, 'getStudentList'])->name('student.list.show');
+    Route::get('/students/view/profile/{id}', [StudentController::class, 'showStudentProfile'])->name('student.profile.show');
     Route::get('/students/view/attendance/{id}', [AttendanceController::class, 'showStudentAttendance'])->name('student.attendance.show');
 
     // Marks
