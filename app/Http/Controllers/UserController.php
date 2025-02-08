@@ -34,7 +34,6 @@ class UserController extends Controller
         PromotionRepository $promotionRepository,
         StudentParentInfoRepository $studentParentInfoRepository
     ) {
-        $this->middleware('auth');
         $this->middleware(['can:view users']);
         $this->userRepository = $userRepository;
         $this->schoolSessionRepository = $schoolSessionRepository;
