@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Interfaces\UserInterface;
 
 class UserController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function index()
     {
-        $users = User::with('roles')->paginate(10);
+        $users = $this->userRepository->getAllUsers();
         return view('users.index', compact('users'));
     }
 

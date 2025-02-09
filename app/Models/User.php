@@ -126,8 +126,13 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
-    public function roles()
+    public function role()
     {
-        return $this->belongsToMany(Role::class, 'role_user');
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role->name === $role;
     }
 }

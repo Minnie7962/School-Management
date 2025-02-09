@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\UserInterface;
+use App\Models\User;
 
 class UserService implements UserInterface
 {
@@ -59,5 +60,10 @@ class UserService implements UserInterface
     public function changePassword($new_password)
     {
         // Implement changePassword method
+    }
+
+    public function getAllUsers()
+    {
+        return User::all();
     }
 }
